@@ -3,12 +3,24 @@
 <head>
   <title>walkingman</title>
   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
 </head>
 <body>
-  <h1>#walkingman</h1>
+  <div class="container main">
+
+    <h1 class="center-align">#WALKINGMAN</h1>
+    
+    <div class="pics col-s12">
+    </div>
+
+  </div>
 
   <script type="text/javascript">
+
+  var pics = {};
+  var index = 0;
 
   $(document).ready(function() {
 
@@ -22,19 +34,32 @@
         success: function(data) {               
           data.data.forEach(function(image){
              if (image.tags[0] === 'walkingman') {
-              $('body').append('<img class="gram" src="' +  image.images.standard_resolution.url + '" />');
+              $('.pics').append('<img class="gram" src="' +  image.images.standard_resolution.url + '" />');
+              
+              var loc = image.caption.text.slice(0, image.caption.text.indexOf(' #'));
+
+              pics[index] = {
+                url: image.images.standard_resolution.url,
+                location: loc
+              };
+              index++;
              }
           });
-
           if (data.pagination.next_url) {
             instaGet(data.pagination.next_url);
           }
-
         }
       });
     };
 
     instaGet("https://api.instagram.com/v1/users/self/media/recent/?access_token=3175277.86742aa.a14f2444b1404e96a99f7b2d3295b18e");
+
+    $('img').hover(
+      function(){
+        $(this).addClass('hovered');
+      }, function() {
+        $(this).removeClass('hovered');
+      });
 
 
   });
