@@ -17,7 +17,6 @@ var instaGet = function(url) {
     error: function(collection, response, options) {
       console.log(response.statusText);
     },
-    // A timeout is the only way to get an error to JSONP calls
     timeout: 10000
   });
 
