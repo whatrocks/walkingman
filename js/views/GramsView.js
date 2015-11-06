@@ -1,7 +1,6 @@
 var GramsView = Backbone.View.extend({
 
   initialize: function() {
-    // this.render();
     this.collection.on('sync', this.render, this);
   },
 
@@ -11,6 +10,7 @@ var GramsView = Backbone.View.extend({
 
   renderGram: function(gram) {
     var gramView = new GramView({model: gram});
+    this.$el.addClass('pics col-s12');
     this.$el.append(gramView.render());
   }
 

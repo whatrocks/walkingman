@@ -1,21 +1,29 @@
 // Grab the pictures 
 var grams = new Grams();
-grams.fetch({
-  data: {},
-  success: function(collection, response, options) {
-    // console.log(collection);
-    // console.log(response);
-    // grams.parse(response, options);
-    // console.log(options);
-  },
-  error: function(collection, response, options) {
-    console.log(response.statusText);
-  },
-  // A timeout is the only way to get an error to JSONP calls
-  timeout: 10000
-});
+var instaGet = function(url) {
 
+  grams.url = url;
 
+  grams.fetch({
+    data: {},
+    success: function(collection, response, options) {
+      
+      if (response.pagination.next_url) {
+        grams.url = response.pagination.next_url;
+        instaGet(response.pagination.next_url);
+      }
+
+    },
+    error: function(collection, response, options) {
+      console.log(response.statusText);
+    },
+    // A timeout is the only way to get an error to JSONP calls
+    timeout: 10000
+  });
+
+};
+
+instaGet('https://api.instagram.com/v1/users/self/media/recent/?access_token=3175277.86742aa.a14f2444b1404e96a99f7b2d3295b18e');
 
 var app = new AppView({
   collection: grams
