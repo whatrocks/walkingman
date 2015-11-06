@@ -7,7 +7,8 @@ var GramView = Backbone.View.extend({
   template: _.template('<img class="gram" src=<%= src %>>'),
 
   render: function() {
-    this.$el.html(this.template(this.model.attributes));
+    // this.$el.html(this.template(this.model.attributes));
+    this.setElement(this.template(this.model.attributes));
     return this.$el;
   }
 
