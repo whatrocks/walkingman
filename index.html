@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>walkingman</title>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+  <h1>#walkingman</h1>
+
+  <script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $.ajax({
+      url: "https://api.instagram.com/v1/users/self/media/recent/?access_token=3175277.86742aa.a14f2444b1404e96a99f7b2d3295b18e",
+      method: 'GET',
+      contentType: 'application/json',
+      dataType: 'jsonP',
+      success: function(data) {               
+        data.data.forEach(function(image){
+           if (image.tags[0] === 'walkingman') {
+            $('body').append('<img class="gram" src="' +  image.images.standard_resolution.url + '" />');
+           }
+        });
+      }
+    });
+
+
+
+  });
+
+  </script>
+</body>
+</html>
