@@ -1,0 +1,19 @@
+{
+  "name": "walkingman",
+  "homepage": "http://www.whatrocks.org/walkingman",
+  "authors": [
+    "Charles Harrington <charles.harrington@gmail.com>"
+  ],
+  "description": "little green men",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
