@@ -19,9 +19,6 @@
 
   <script type="text/javascript">
 
-  var pics = {};
-  var index = 0;
-
   $(document).ready(function() {
 
     var instaGet = function(url) {
@@ -34,15 +31,12 @@
         success: function(data) {               
           data.data.forEach(function(image){
              if (image.tags[0] === 'walkingman') {
-              $('.pics').append('<img class="gram" src="' +  image.images.standard_resolution.url + '" />');
               
               var loc = image.caption.text.slice(0, image.caption.text.indexOf(' #'));
 
-              pics[index] = {
-                url: image.images.standard_resolution.url,
-                location: loc
-              };
-              index++;
+              $('.pics').append($('<img/>', {'src': image.images.standard_resolution.url,
+                                             'class': 'gram',
+                                             'data-loc' : loc }));              
              }
           });
           if (data.pagination.next_url) {
@@ -51,17 +45,7 @@
         }
       });
     };
-
     instaGet("https://api.instagram.com/v1/users/self/media/recent/?access_token=3175277.86742aa.a14f2444b1404e96a99f7b2d3295b18e");
-
-    $('img').hover(
-      function(){
-        $(this).addClass('hovered');
-      }, function() {
-        $(this).removeClass('hovered');
-      });
-
-
   });
 
   </script>

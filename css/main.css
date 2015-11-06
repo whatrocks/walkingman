@@ -10,5 +10,7 @@
 }
 
 .hovered {
-  margin: 40px;
+  content: attr(data-loc);
+  position: absolute;
+  text-align: center;
 }
